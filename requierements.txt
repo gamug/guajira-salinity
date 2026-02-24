@@ -1,4 +1,5 @@
 geopandas==1.1.2
+imbalanced-learn==0.14.1
 ipywidgets==8.1.8
 keplergl==0.3.7
 matplotlib==3.10.8
@@ -6,6 +7,7 @@ nbconvert==7.17.0
 pandas==2.3.3
 pandas-profiling==3.6.6
 plotly==6.5.2
+python-dotenv==1.2.1
 scikit-learn==1.7.2
 scipy==1.15.3
 sodapy==2.2.0
