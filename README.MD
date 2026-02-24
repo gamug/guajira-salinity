@@ -29,5 +29,7 @@ To perform this development we use python 3.10 an the libraries in //quirements.
 Using anaconda the setup is as follows:
 
 `conda create -n guajira python==3.10`
+
 `conda activate guajira`
+
 `pip install -r requirements.txt`
