@@ -86,7 +86,7 @@ def join_gepandas(file_path: str) -> pd.DataFrame:
     hidrology_cats = gpd.read_file(os.path.join(config.path['raw_data'], '_Salinidad_Guajira.zip'))
     hidrology_cats = hidrology_cats.to_crs(hidrogeology.crs)
     hidrology_cats = gpd.sjoin(hidrology_cats, hidrogeology, how="left", predicate="within")
-    hidrology_cats = hidrology_cats[['X', 'Y', 'class_hidr']].dropna()
+    hidrology_cats = hidrology_cats[['X', 'Y', 'class_hidr']]
     hidrology_cats.to_csv(file_path, index=0)
     return hidrology_cats
 
@@ -152,7 +152,7 @@ def build_dataset(numeric_inputted_set: pd.DataFrame, salinity: pd.DataFrame) ->
     dataset[config.salinity_cat_cols] = salinity[config.salinity_cat_cols]
     file_path = os.path.join(config.path['curated_data'], 'hidrology_cats.csv')
     hidrology_cats = pd.read_csv(file_path) if os.path.exists(file_path) else join_gepandas(file_path)
-    dataset = dataset.join(hidrology_cats.set_index(['X', 'Y']), on=('X','Y'))
+    dataset = dataset.join(hidrology_cats.set_index(['X', 'Y']), on=('X','Y')).dropna(subset=['class_hidr'])
     dataset = get_salt_categories(dataset)
     dataset.drop(config.salinity_correlation_excludes, axis=1, inplace=True)
     dataset = dataset[dataset.Tipo_de_Ca=='Pozo']
