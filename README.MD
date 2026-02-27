@@ -33,3 +33,5 @@ Using anaconda the setup is as follows:
 `conda activate guajira`
 
 `pip install -r requirements.txt`
+
+`python __main__.py`

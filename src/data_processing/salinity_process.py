@@ -11,7 +11,12 @@ from commons import profile_dataset
 def get_salinity() -> pd.DataFrame:
     """Fetch the salinity dataset from the specified URL and save it locally."""
     try:
-        salinity = pd.read_csv(os.environ['SALINITY_URL'])
+        salinity = pd.read_csv(
+            os.environ.get(
+                'SALINITY_URL',
+                "https://datos-abiertos-igac-igac-oit.hub.arcgis.com/api/download/v1/items/182ec73875ff4d9c8c24f7c1630acf58/csv?layers=0"
+            )
+        )
         salinity.to_csv(os.path.join(config.path['raw_data'], '_Salinidad_Guajira.csv'), index=0)
         return salinity
     except Exception as e:
