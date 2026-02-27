@@ -1,4 +1,4 @@
-import os
+import os, shutil
 import config
 
 import pandas as pd
@@ -18,6 +18,10 @@ def check_directories():
     """
     for dir in config.path.values():
         os.makedirs(dir, exist_ok=True)
+    hidro_file = os.path.join('input', 'raw', 'Mapa_hidrogeologico_polygon.zip')
+    if not os.path.exists(hidro_file):
+        shutil.copy('Mapa_hidrogeologico_polygon.zip', hidro_file)
+
         
 def profile_dataset(dataset: pd.DataFrame, name: str='name_not_defined', save: bool=False) -> None:
     """Generate a profiling report for a given dataset.
